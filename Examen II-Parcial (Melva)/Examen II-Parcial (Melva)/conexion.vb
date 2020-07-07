@@ -49,11 +49,11 @@ Public Class conexion
             conexion.Close()
             If (i > 0) Then
                 Return True
-
+                conexion.Close()
             End If
         Else
-            conexion.Close()
             Return False
+            conexion.Close()
         End If
     End Function
 
@@ -62,6 +62,27 @@ Public Class conexion
         Dim cont As Int32 = 0
         conexion.Open()
         comand = New SqlCommand("SELECT * FROM factura.cliente where idCliente ='" + ID + "'", conexion)
+        reader = comand.ExecuteReader()
+        While reader.Read
+            cont = cont + 1
+        End While
+        reader.Close()
+        If cont = 0 Then
+            comando = New SqlCommand(sql, conexion)
+            Dim i As Integer = comando.ExecuteNonQuery()
+            conexion.Close()
+            If (i > 0) Then
+                Return True
+            End If
+        Else
+            Return False
+        End If
+    End Function
+    Function insert3(ByVal sql, ByVal ID)
+        Dim reader As SqlDataReader
+        Dim cont As Int32 = 0
+        conexion.Open()
+        comand = New SqlCommand("SELECT * FROM factura.producto where idProducto ='" + ID + "'", conexion)
         reader = comand.ExecuteReader()
         While reader.Read
             cont = cont + 1

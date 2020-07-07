@@ -44,9 +44,16 @@ Partial Class Venta
         Me.txtBuscar = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.btnMostrar = New System.Windows.Forms.Button()
+        Me.ErrorProvider2 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ErrorProvider3 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnRegresar = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataVenta, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtCantidad
@@ -163,14 +170,15 @@ Partial Class Venta
         'txtFecha
         '
         Me.txtFecha.Location = New System.Drawing.Point(118, 70)
-        Me.txtFecha.Mask = "0/0/0000"
+        Me.txtFecha.Mask = "00/00/0000"
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(138, 20)
         Me.txtFecha.TabIndex = 20
+        Me.txtFecha.ValidatingType = GetType(Date)
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(328, 23)
+        Me.btnGuardar.Location = New System.Drawing.Point(403, 28)
         Me.btnGuardar.Name = "btnGuardar"
         Me.btnGuardar.Size = New System.Drawing.Size(75, 23)
         Me.btnGuardar.TabIndex = 21
@@ -179,7 +187,7 @@ Partial Class Venta
         '
         'btnEliminar
         '
-        Me.btnEliminar.Location = New System.Drawing.Point(328, 81)
+        Me.btnEliminar.Location = New System.Drawing.Point(403, 86)
         Me.btnEliminar.Name = "btnEliminar"
         Me.btnEliminar.Size = New System.Drawing.Size(75, 23)
         Me.btnEliminar.TabIndex = 22
@@ -188,7 +196,7 @@ Partial Class Venta
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(328, 52)
+        Me.btnModificar.Location = New System.Drawing.Point(403, 57)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 23
@@ -197,7 +205,7 @@ Partial Class Venta
         '
         'btnNuevo
         '
-        Me.btnNuevo.Location = New System.Drawing.Point(328, 110)
+        Me.btnNuevo.Location = New System.Drawing.Point(403, 115)
         Me.btnNuevo.Name = "btnNuevo"
         Me.btnNuevo.Size = New System.Drawing.Size(75, 23)
         Me.btnNuevo.TabIndex = 24
@@ -206,15 +214,18 @@ Partial Class Venta
         '
         'DataVenta
         '
+        Me.DataVenta.AllowUserToAddRows = False
+        Me.DataVenta.AllowUserToDeleteRows = False
         Me.DataVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataVenta.Location = New System.Drawing.Point(22, 277)
+        Me.DataVenta.Location = New System.Drawing.Point(22, 259)
         Me.DataVenta.Name = "DataVenta"
+        Me.DataVenta.ReadOnly = True
         Me.DataVenta.Size = New System.Drawing.Size(528, 150)
         Me.DataVenta.TabIndex = 25
         '
         'txtBuscar
         '
-        Me.txtBuscar.Location = New System.Drawing.Point(216, 248)
+        Me.txtBuscar.Location = New System.Drawing.Point(381, 233)
         Me.txtBuscar.Name = "txtBuscar"
         Me.txtBuscar.Size = New System.Drawing.Size(138, 20)
         Me.txtBuscar.TabIndex = 27
@@ -222,9 +233,10 @@ Partial Class Venta
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(154, 251)
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(319, 236)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(43, 13)
+        Me.Label7.Size = New System.Drawing.Size(53, 16)
         Me.Label7.TabIndex = 26
         Me.Label7.Text = "Buscar:"
         '
@@ -232,11 +244,40 @@ Partial Class Venta
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'btnMostrar
+        '
+        Me.btnMostrar.Location = New System.Drawing.Point(381, 169)
+        Me.btnMostrar.Name = "btnMostrar"
+        Me.btnMostrar.Size = New System.Drawing.Size(113, 23)
+        Me.btnMostrar.TabIndex = 28
+        Me.btnMostrar.Text = "Mostrar Venta"
+        Me.btnMostrar.UseVisualStyleBackColor = True
+        '
+        'ErrorProvider2
+        '
+        Me.ErrorProvider2.ContainerControl = Me
+        '
+        'ErrorProvider3
+        '
+        Me.ErrorProvider3.ContainerControl = Me
+        '
+        'btnRegresar
+        '
+        Me.btnRegresar.Location = New System.Drawing.Point(3, 415)
+        Me.btnRegresar.Name = "btnRegresar"
+        Me.btnRegresar.Size = New System.Drawing.Size(75, 23)
+        Me.btnRegresar.TabIndex = 29
+        Me.btnRegresar.Text = "Regresar"
+        Me.btnRegresar.UseVisualStyleBackColor = True
+        '
         'Venta
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(590, 439)
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.ClientSize = New System.Drawing.Size(565, 439)
+        Me.Controls.Add(Me.btnRegresar)
+        Me.Controls.Add(Me.btnMostrar)
         Me.Controls.Add(Me.txtBuscar)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.DataVenta)
@@ -251,6 +292,8 @@ Partial Class Venta
         Me.GroupBox1.PerformLayout()
         CType(Me.DataVenta, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -273,8 +316,13 @@ Partial Class Venta
     Friend WithEvents btnModificar As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents DataVenta As DataGridView
-    Friend WithEvents txtFecha As MaskedTextBox
     Friend WithEvents txtBuscar As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents ErrorProvider1 As ErrorProvider
+    Friend WithEvents btnMostrar As Button
+    Friend WithEvents ErrorProvider2 As ErrorProvider
+    Friend WithEvents ErrorProvider3 As ErrorProvider
+    Friend WithEvents txtFecha As MaskedTextBox
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents btnRegresar As Button
 End Class

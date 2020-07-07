@@ -17,7 +17,6 @@ Public Class Venta
                 MessageBox.Show("Revise los datos Ingresados", "Error al ingresar", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 
@@ -25,12 +24,12 @@ Public Class Venta
         Llenar()
     End Sub
     Private Sub Llenar()
-        conexion.Llenar("select * from factura.Venta", "factura.Venta")
+        conexion.Llenar("select idVenta as 'ID Venta', fechaVenta as 'Fecha', precio as 'Precio', cantidad as 'Cantidad', idCliente as 'ID Cliente', idProducto as 'ID Producto' from factura.Venta", "factura.Venta")
         DataVenta.DataSource = conexion.ds.Tables("factura.Venta")
     End Sub
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-        Dim update As String = "idVenta='" + txtVenta.Text + "', fechaVenta='" + txtFecha.Text + "', precio='" + txtPrecio.Text + "', cantidad='" + txtCantidad.Text + "', idCliente='" + txtCliente.Text + "', idProducto='" + "'"
+        Dim update As String = "idVenta='" + txtVenta.Text + "', fechaVenta='" + txtFecha.Text + "', precio='" + txtPrecio.Text + "', cantidad='" + txtCantidad.Text + "', idCliente='" + txtCliente.Text + "', idProducto='" + txtProducto.Text + "'"
         If (conexion.modificar(" factura.Venta ", update, " idVenta= '" + txtVenta.Text + "'")) Then
             MessageBox.Show("Se ha actualizado satisfactoreamente")
             Llenar()
@@ -125,19 +124,11 @@ Public Class Venta
             e.Handled = True
         End If
     End Sub
-    Private Sub txtFecha_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFecha.KeyPress
+    Private Sub txtFecha_KeyPress(sender As Object, e As KeyPressEventArgs)
         If (Asc(e.KeyChar) >= 48 And Asc(e.KeyChar) <= 57) Or Asc(e.KeyChar) = 8 Then
             e.Handled = False
         Else
             e.Handled = True
-        End If
-    End Sub
-
-    Private Sub txtVenta_Validating(sender As Object, e As CancelEventArgs) Handles txtVenta.Validating
-        If DirectCast(sender, TextBox).Text.Length = 4 Then
-            Me.ErrorProvider1.SetError(sender, "")
-        Else
-            Me.ErrorProvider1.SetError(sender, "Debe obtener 4 dígitos")
         End If
     End Sub
     Private Sub txtPrecio_Validating(sender As Object, e As CancelEventArgs) Handles txtPrecio.Validating
@@ -145,6 +136,53 @@ Public Class Venta
             Me.ErrorProvider1.SetError(sender, "")
         Else
             Me.ErrorProvider1.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub btnMostrar_Click(sender As Object, e As EventArgs) Handles btnMostrar.Click
+        Datos.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub txtCantidad_Validating(sender As Object, e As CancelEventArgs) Handles txtCantidad.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider2.SetError(sender, "")
+        Else
+            Me.ErrorProvider2.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtCliente_Validating(sender As Object, e As CancelEventArgs) Handles txtCliente.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider2.SetError(sender, "")
+        Else
+            Me.ErrorProvider2.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+    Private Sub txtProducto_Validating(sender As Object, e As CancelEventArgs) Handles txtProducto.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider3.SetError(sender, "")
+        Else
+            Me.ErrorProvider3.SetError(sender, "Campo obligatorio")
+        End If
+    End Sub
+
+    Private Sub txtFecha_MouseHover(sender As Object, e As EventArgs) Handles txtFecha.MouseHover
+        ToolTip1.SetToolTip(txtFecha, "Formato  DD/MM/AA")
+        ToolTip1.ToolTipTitle = "Fecha"
+        ToolTip1.ToolTipIcon = ToolTipIcon.Info
+    End Sub
+
+    Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click
+        Cliente.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub txtVenta_Validating(sender As Object, e As CancelEventArgs) Handles txtVenta.Validating
+        If DirectCast(sender, TextBox).Text.Length > 0 Then
+            Me.ErrorProvider3.SetError(sender, "")
+        Else
+            Me.ErrorProvider3.SetError(sender, "Campo obligatorio")
         End If
     End Sub
 End Class
